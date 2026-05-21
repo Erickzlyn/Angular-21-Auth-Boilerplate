@@ -6,7 +6,34 @@ import { first } from 'rxjs/operators';
 import { AccountService, AlertService } from '@app/_services';
 import { MustMatch } from '@app/_helpers';
 
-@Component({ standalone: false, templateUrl: 'register.component.html' })
+@Component({
+    standalone: false,
+    templateUrl: 'register.component.html',
+    styles: [`
+        :host ::ng-deep .form-control,
+        :host ::ng-deep .form-select {
+            background-color: #242424 !important;
+            border: 1px solid #333 !important;
+            color: #ffffff !important;
+            border-radius: 10px !important;
+        }
+        :host ::ng-deep .form-control::placeholder {
+            color: #555 !important;
+        }
+        :host ::ng-deep .form-control:focus,
+        :host ::ng-deep .form-select:focus {
+            background-color: #2c2c2c !important;
+            border-color: #C1121F !important;
+            box-shadow: 0 0 0 3px rgba(193, 18, 31, 0.2) !important;
+        }
+        :host ::ng-deep .form-label {
+            color: #888 !important;
+        }
+        :host ::ng-deep .form-check-label {
+            color: #888 !important;
+        }
+    `]
+})
 export class RegisterComponent implements OnInit {
     form!: FormGroup;
     submitting = false;
@@ -34,16 +61,12 @@ export class RegisterComponent implements OnInit {
         });
     }
 
-    // convenience getter for easy access to form fields
     get f() { return this.form.controls; }
 
     onSubmit() {
         this.submitted = true;
-
-        // reset alerts on submit
         this.alertService.clear();
 
-        // stop here if form is invalid
         if (this.form.invalid) {
             return;
         }
