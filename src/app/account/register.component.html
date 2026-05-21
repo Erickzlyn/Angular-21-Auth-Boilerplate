@@ -1,72 +1,250 @@
-﻿<h3 class="card-header">Register</h3>
-<div class="card-body">
+﻿<div class="rg-wrapper">
+  <div class="rg-card">
+    <div class="rg-header">
+      <div class="rg-icon">☕</div>
+      <h3>Register</h3>
+      <p>Create your account to get started.</p>
+    </div>
+
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="row">
-            <div class="mb-3 col-2">
-                <label class="form-label">Title</label>
-                <select formControlName="title" class="form-select" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
-                    <option value=""></option>
-                    <option value="Mr">Mr</option>
-                    <option value="Mrs">Mrs</option>
-                    <option value="Miss">Miss</option>
-                    <option value="Ms">Ms</option>
-                </select>
-                <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
-                    <div *ngIf="f.title.errors.required">Title is required</div>
-                </div>
-            </div>
-            <div class="mb-3 col-5">
-                <label class="form-label">First Name</label>
-                <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
-                <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                    <div *ngIf="f.firstName.errors.required">First Name is required</div>
-                </div>
-            </div>
-            <div class="mb-3 col-5">
-                <label class="form-label">Last Name</label>
-                <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
-                <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                    <div *ngIf="f.lastName.errors.required">Last Name is required</div>
-                </div>
-            </div>
+      <!-- Title / First Name / Last Name -->
+      <div class="rg-row">
+        <div class="rg-field" style="flex: 0 0 120px;">
+          <label class="rg-label">TITLE</label>
+          <select formControlName="title" class="rg-input" [class.rg-input-error]="submitted && f.title.errors">
+            <option value="" style="background:#3A2318"></option>
+            <option value="Mr" style="background:#3A2318">Mr</option>
+            <option value="Mrs" style="background:#3A2318">Mrs</option>
+            <option value="Miss" style="background:#3A2318">Miss</option>
+            <option value="Ms" style="background:#3A2318">Ms</option>
+          </select>
+          <div *ngIf="submitted && f.title.errors" class="rg-error">Title is required</div>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                <div *ngIf="f.email.errors.required">Email is required</div>
-                <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-            </div>
+        <div class="rg-field" style="flex: 1;">
+          <label class="rg-label">FIRST NAME</label>
+          <input type="text" formControlName="firstName" class="rg-input" [class.rg-input-error]="submitted && f.firstName.errors" placeholder="John" />
+          <div *ngIf="submitted && f.firstName.errors" class="rg-error">First Name is required</div>
         </div>
-        <div class="row">
-            <div class="mb-3 col">
-                <label class="form-label">Password</label>
-                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                    <div *ngIf="f.password.errors.required">Password is required</div>
-                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-                </div>
-            </div>
-            <div class="mb-3 col">
-                <label class="form-label">Confirm Password</label>
-                <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
-                <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-                    <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
-                    <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
-                </div>
-            </div>
+        <div class="rg-field" style="flex: 1;">
+          <label class="rg-label">LAST NAME</label>
+          <input type="text" formControlName="lastName" class="rg-input" [class.rg-input-error]="submitted && f.lastName.errors" placeholder="Doe" />
+          <div *ngIf="submitted && f.lastName.errors" class="rg-error">Last Name is required</div>
         </div>
-        <div class="mb-3 form-check">
-            <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }" />
-            <label for="acceptTerms" class="form-check-label">Accept Terms & Conditions</label>
-            <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
+      </div>
+
+      <!-- Email -->
+      <div class="rg-field">
+        <label class="rg-label">EMAIL</label>
+        <input type="text" formControlName="email" class="rg-input" [class.rg-input-error]="submitted && f.email.errors" placeholder="you@example.com" />
+        <div *ngIf="submitted && f.email.errors" class="rg-error">
+          <span *ngIf="f.email.errors.required">Email is required</span>
+          <span *ngIf="f.email.errors.email">Email must be a valid email address</span>
         </div>
-        <div class="mb-3">
-            <button [disabled]="submitting" class="btn btn-primary">
-                <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
-                Register
-            </button>
-            <a routerLink="../login" href="" class="btn btn-link">Cancel</a>
+      </div>
+
+      <!-- Password / Confirm Password -->
+      <div class="rg-row">
+        <div class="rg-field" style="flex: 1;">
+          <label class="rg-label">PASSWORD</label>
+          <input type="password" formControlName="password" class="rg-input" [class.rg-input-error]="submitted && f.password.errors" placeholder="••••••••" />
+          <div *ngIf="submitted && f.password.errors" class="rg-error">
+            <span *ngIf="f.password.errors.required">Password is required</span>
+            <span *ngIf="f.password.errors.minlength">Min. 6 characters</span>
+          </div>
         </div>
+        <div class="rg-field" style="flex: 1;">
+          <label class="rg-label">CONFIRM PASSWORD</label>
+          <input type="password" formControlName="confirmPassword" class="rg-input" [class.rg-input-error]="submitted && f.confirmPassword.errors" placeholder="••••••••" />
+          <div *ngIf="submitted && f.confirmPassword.errors" class="rg-error">
+            <span *ngIf="f.confirmPassword.errors.required">Confirm Password is required</span>
+            <span *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Terms -->
+      <div class="rg-check">
+        <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="rg-checkbox" [class.rg-input-error]="submitted && f.acceptTerms.errors" />
+        <label for="acceptTerms" class="rg-check-label">Accept Terms & Conditions</label>
+        <div *ngIf="submitted && f.acceptTerms.errors" class="rg-error">Accept Ts & Cs is required</div>
+      </div>
+
+      <!-- Actions -->
+      <div class="rg-actions">
+        <button [disabled]="submitting" class="rg-btn-primary">
+          <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+          Register
+        </button>
+        <a routerLink="../login" class="rg-btn-link">Cancel</a>
+      </div>
     </form>
+  </div>
 </div>
+
+<style>
+  .rg-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #2C1A14 0%, #3E2723 50%, #5C3320 100%);
+    padding: 24px;
+    box-sizing: border-box;
+  }
+
+  .rg-card {
+    background: linear-gradient(180deg, #3A2318 0%, #2C1A14 100%);
+    border: 1px solid rgba(217,160,102,0.20);
+    border-top: 3px solid #D9A066;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 620px;
+    padding: 48px 40px;
+    box-shadow: 0 20px 60px rgba(44,26,20,0.40);
+  }
+
+  .rg-header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .rg-icon {
+    font-size: 2.8rem;
+    margin-bottom: 14px;
+  }
+
+  .rg-header h3 {
+    color: #FAF3E8;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.02em;
+  }
+
+  .rg-header p {
+    color: #C8A882;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .rg-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 0;
+  }
+
+  .rg-field {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rg-label {
+    color: #C8A882;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  .rg-input {
+    background-color: #4A2E22;
+    border: 1px solid rgba(217,160,102,0.20);
+    border-radius: 10px;
+    color: #FAF3E8;
+    padding: 13px 16px;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+    appearance: auto;
+  }
+
+  .rg-input::placeholder {
+    color: rgba(250,243,232,0.35);
+  }
+
+  .rg-input:focus {
+    border-color: #D9A066;
+    background-color: #4E3328;
+    box-shadow: 0 0 0 3px rgba(217,160,102,0.18);
+  }
+
+  .rg-input-error {
+    border-color: #E57373 !important;
+  }
+
+  .rg-error {
+    color: #E57373;
+    font-size: 0.78rem;
+    margin-top: 5px;
+    font-weight: 500;
+  }
+
+  .rg-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .rg-checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: #D9A066;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .rg-check-label {
+    color: #C8A882;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .rg-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .rg-btn-primary {
+    flex: 1;
+    padding: 13px;
+    background: #D9A066;
+    color: #3E2723;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: background-color 0.2s, transform 0.1s;
+  }
+
+  .rg-btn-primary:hover {
+    background: #A26749;
+    color: #FAF3E8;
+    transform: translateY(-1px);
+  }
+
+  .rg-btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .rg-btn-link {
+    color: #C8A882;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .rg-btn-link:hover {
+    color: #D9A066;
+  }
+</style>
