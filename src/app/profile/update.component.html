@@ -1,71 +1,286 @@
-<h1>Update Profile</h1>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="row">
-        <div class="mb-3 col-2">
-            <label class="form-label">Title</label>
-            <select formControlName="title" class="form-select" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
-                <option value=""></option>
-                <option value="Mr">Mr</option>
-                <option value="Mrs">Mrs</option>
-                <option value="Miss">Miss</option>
-                <option value="Ms">Ms</option>
-            </select>
-            <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
-                <div *ngIf="f.title.errors.required">Title is required</div>
-            </div>
-        </div>
-        <div class="mb-3 col-5">
-            <label class="form-label">First Name</label>
-            <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
-            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                <div *ngIf="f.firstName.errors.required">First Name is required</div>
-            </div>
-        </div>
-        <div class="mb-3 col-5">
-            <label class="form-label">Last Name</label>
-            <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
-            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                <div *ngIf="f.lastName.errors.required">Last Name is required</div>
-            </div>
-        </div>
+<div class="up-wrapper">
+  <div class="up-card">
+    <div class="up-header">
+      <div class="up-icon">✏️</div>
+      <h3>Update Profile</h3>
+      <p>Update your personal information below.</p>
     </div>
-    <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-            <div *ngIf="f.email.errors.required">Email is required</div>
-            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <!-- Title / First Name / Last Name -->
+      <div class="up-row">
+        <div class="up-field" style="flex: 0 0 110px;">
+          <label class="up-label">TITLE</label>
+          <select formControlName="title" class="up-input" [class.up-input-error]="submitted && f.title.errors">
+            <option value="" style="background:#3A2318"></option>
+            <option value="Mr" style="background:#3A2318">Mr</option>
+            <option value="Mrs" style="background:#3A2318">Mrs</option>
+            <option value="Miss" style="background:#3A2318">Miss</option>
+            <option value="Ms" style="background:#3A2318">Ms</option>
+          </select>
+          <div *ngIf="submitted && f.title.errors" class="up-error">Title is required</div>
         </div>
-    </div>
-    <h3 class="pt-3">Change Password</h3>
-    <p>Leave blank to keep the same password</p>
-    <div class="row">
-        <div class="mb-3 col">
-            <label class="form-label">Password</label>
-            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                <div *ngIf="f.password.errors.required">Password is required</div>
-                <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-            </div>
+        <div class="up-field" style="flex: 1;">
+          <label class="up-label">FIRST NAME</label>
+          <input type="text" formControlName="firstName" class="up-input" [class.up-input-error]="submitted && f.firstName.errors" />
+          <div *ngIf="submitted && f.firstName.errors" class="up-error">First Name is required</div>
         </div>
-        <div class="mb-3 col">
-            <label class="form-label">Confirm Password</label>
-            <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
-            <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-                <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
-                <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
-            </div>
+        <div class="up-field" style="flex: 1;">
+          <label class="up-label">LAST NAME</label>
+          <input type="text" formControlName="lastName" class="up-input" [class.up-input-error]="submitted && f.lastName.errors" />
+          <div *ngIf="submitted && f.lastName.errors" class="up-error">Last Name is required</div>
         </div>
-    </div>
-    <div class="mb-3">
-        <button type="submit" [disabled]="submitting" class="btn btn-primary me-2">
-            <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
-            Update
+      </div>
+
+      <!-- Email -->
+      <div class="up-field">
+        <label class="up-label">EMAIL</label>
+        <input type="text" formControlName="email" class="up-input" [class.up-input-error]="submitted && f.email.errors" />
+        <div *ngIf="submitted && f.email.errors" class="up-error">
+          <span *ngIf="f.email.errors.required">Email is required</span>
+          <span *ngIf="f.email.errors.email">Email must be a valid email address</span>
+        </div>
+      </div>
+
+      <!-- Change Password Divider -->
+      <div class="up-section-divider">
+        <span>Change Password</span>
+      </div>
+      <p class="up-hint">Leave blank to keep the same password</p>
+
+      <!-- Password / Confirm Password -->
+      <div class="up-row">
+        <div class="up-field" style="flex: 1;">
+          <label class="up-label">PASSWORD</label>
+          <input type="password" formControlName="password" class="up-input" [class.up-input-error]="submitted && f.password.errors" placeholder="••••••••" />
+          <div *ngIf="submitted && f.password.errors" class="up-error">
+            <span *ngIf="f.password.errors.required">Password is required</span>
+            <span *ngIf="f.password.errors.minlength">Min. 6 characters</span>
+          </div>
+        </div>
+        <div class="up-field" style="flex: 1;">
+          <label class="up-label">CONFIRM PASSWORD</label>
+          <input type="password" formControlName="confirmPassword" class="up-input" [class.up-input-error]="submitted && f.confirmPassword.errors" placeholder="••••••••" />
+          <div *ngIf="submitted && f.confirmPassword.errors" class="up-error">
+            <span *ngIf="f.confirmPassword.errors.required">Confirm Password is required</span>
+            <span *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="up-actions">
+        <button type="submit" [disabled]="submitting" class="up-btn-primary">
+          <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+          Update
         </button>
-        <button type="button" (click)="onDelete()" [disabled]="deleting" class="btn btn-danger">
-            <span *ngIf="deleting" class="spinner-border spinner-border-sm me-1"></span>
-            Delete
+        <button type="button" (click)="onDelete()" [disabled]="deleting" class="up-btn-danger">
+          <span *ngIf="deleting" class="spinner-border spinner-border-sm me-1"></span>
+          Delete
         </button>
-        <a routerLink="../" href="" class="btn btn-link">Cancel</a>
-    </div>
-</form>
+        <a routerLink="../" class="up-btn-link">Cancel</a>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<style>
+  .up-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #2C1A14 0%, #3E2723 50%, #5C3320 100%);
+    padding: 40px 24px;
+    box-sizing: border-box;
+  }
+
+  .up-card {
+    background: linear-gradient(180deg, #3A2318 0%, #2C1A14 100%);
+    border: 1px solid rgba(217,160,102,0.20);
+    border-top: 3px solid #D9A066;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 680px;
+    padding: 48px 40px;
+    box-shadow: 0 20px 60px rgba(44,26,20,0.40);
+  }
+
+  .up-header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .up-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+  }
+
+  .up-header h3 {
+    color: #FAF3E8;
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.02em;
+  }
+
+  .up-header p {
+    color: #C8A882;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .up-row {
+    display: flex;
+    gap: 16px;
+  }
+
+  .up-field {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .up-label {
+    color: #C8A882;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  .up-input {
+    background-color: #4A2E22;
+    border: 1px solid rgba(217,160,102,0.20);
+    border-radius: 10px;
+    color: #FAF3E8;
+    padding: 13px 16px;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+    appearance: auto;
+  }
+
+  .up-input::placeholder {
+    color: rgba(250,243,232,0.35);
+  }
+
+  .up-input:focus {
+    border-color: #D9A066;
+    background-color: #4E3328;
+    box-shadow: 0 0 0 3px rgba(217,160,102,0.18);
+  }
+
+  .up-input-error {
+    border-color: #E57373 !important;
+  }
+
+  .up-error {
+    color: #E57373;
+    font-size: 0.78rem;
+    margin-top: 5px;
+    font-weight: 500;
+  }
+
+  .up-section-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 8px 0 6px;
+    color: #D9A066;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .up-section-divider::before,
+  .up-section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(217,160,102,0.25);
+  }
+
+  .up-hint {
+    color: rgba(200,168,130,0.60);
+    font-size: 0.82rem;
+    margin: 0 0 16px;
+  }
+
+  .up-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+
+  .up-btn-primary {
+    flex: 1;
+    padding: 13px;
+    background: #D9A066;
+    color: #3E2723;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: background-color 0.2s, transform 0.1s;
+  }
+
+  .up-btn-primary:hover {
+    background: #A26749;
+    color: #FAF3E8;
+    transform: translateY(-1px);
+  }
+
+  .up-btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .up-btn-danger {
+    flex: 1;
+    padding: 13px;
+    background: transparent;
+    color: #E57373;
+    border: 1.5px solid #E57373;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: background-color 0.2s, transform 0.1s;
+  }
+
+  .up-btn-danger:hover {
+    background: rgba(229,115,115,0.12);
+    transform: translateY(-1px);
+  }
+
+  .up-btn-danger:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .up-btn-link {
+    color: #C8A882;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+    padding: 4px 0;
+  }
+
+  .up-btn-link:hover {
+    color: #D9A066;
+  }
+</style>
