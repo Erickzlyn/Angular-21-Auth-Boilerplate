@@ -1,21 +1,113 @@
 <div class="app-container">
-    <!-- main nav -->
-    <nav class="navbar navbar-expand navbar-premium px-3" *ngIf="account">
-        <div class="navbar-nav">
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link">Home</a>
-        <a routerLink="/profile" routerLinkActive="active" class="nav-item nav-link">Profile</a>
-        <a *ngIf="account.role === Role.Admin" routerLink="/admin" routerLinkActive="active" class="nav-item nav-link">Admin</a>
-        <button (click)="logout()" class="btn btn-link nav-item nav-link">Logout</button>
-        </div>
-    </nav>
 
-    <!-- subnav router outlet -->
-    <router-outlet name="subnav"></router-outlet>
+  <!-- main nav -->
+  <nav class="nb-nav" *ngIf="account">
+    <div class="nb-brand">
+      <span class="nb-logo">☕</span>
+      <span class="nb-title">CaféApp</span>
+    </div>
 
-    <!-- global alert -->
-    <alert></alert>
+    <div class="nb-links">
+      <a routerLink="/" routerLinkActive="nb-active" [routerLinkActiveOptions]="{exact: true}" class="nb-link">Home</a>
+      <a routerLink="/profile" routerLinkActive="nb-active" class="nb-link">Profile</a>
+      <a *ngIf="account.role === Role.Admin" routerLink="/admin" routerLinkActive="nb-active" class="nb-link">Admin</a>
+      <button (click)="logout()" class="nb-logout">Logout</button>
+    </div>
+  </nav>
 
-    <!-- main router outlet -->
-    <router-outlet></router-outlet>
+  <!-- subnav router outlet -->
+  <router-outlet name="subnav"></router-outlet>
+
+  <!-- global alert -->
+  <alert></alert>
+
+  <!-- main router outlet -->
+  <router-outlet></router-outlet>
 
 </div>
+
+<style>
+  .app-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #2C1A14 0%, #3E2723 50%, #5C3320 100%);
+  }
+
+  .nb-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    height: 64px;
+    background: rgba(44, 26, 20, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(217, 160, 102, 0.20);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.30);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nb-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .nb-logo {
+    font-size: 1.5rem;
+  }
+
+  .nb-title {
+    color: #D9A066;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .nb-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .nb-link {
+    color: #C8A882;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .nb-link:hover {
+    color: #FAF3E8;
+    background: rgba(217, 160, 102, 0.10);
+  }
+
+  .nb-active {
+    color: #D9A066 !important;
+    background: rgba(217, 160, 102, 0.12) !important;
+    font-weight: 700;
+  }
+
+  .nb-logout {
+    color: #C8A882;
+    background: transparent;
+    border: 1.5px solid rgba(217, 160, 102, 0.30);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 7px 16px;
+    margin-left: 8px;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+  }
+
+  .nb-logout:hover {
+    color: #FAF3E8;
+    border-color: #D9A066;
+    background: rgba(217, 160, 102, 0.10);
+  }
+</style>
