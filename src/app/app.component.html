@@ -6,7 +6,6 @@
       <span class="nb-logo">☕</span>
       <span class="nb-title">CaféApp</span>
     </div>
-
     <div class="nb-links">
       <a routerLink="/" routerLinkActive="nb-active" [routerLinkActiveOptions]="{exact: true}" class="nb-link">Home</a>
       <a routerLink="/profile" routerLinkActive="nb-active" class="nb-link">Profile</a>
@@ -22,8 +21,6 @@
   <alert></alert>
 
   <!-- main router outlet -->
-  <div class="app-content">
-    <router-outlet></router-outlet>
-  </div>
+  <router-outlet></router-outlet>
 
 </div>
