@@ -24,3 +24,88 @@
   <router-outlet></router-outlet>
 
 </div>
+
+<style>
+  .app-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #2C1A14 0%, #3E2723 50%, #5C3320 100%);
+  }
+
+  .nb-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    height: 64px;
+    background: rgba(44, 26, 20, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(217, 160, 102, 0.20);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.30);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nb-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nb-logo {
+    font-size: 1.5rem;
+  }
+
+  .nb-title {
+    color: #D9A066;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .nb-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nb-link {
+    color: #C8A882;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .nb-link:hover {
+    color: #FAF3E8;
+    background: rgba(217, 160, 102, 0.10);
+  }
+
+  .nb-active {
+    color: #D9A066 !important;
+    background: rgba(217, 160, 102, 0.12) !important;
+    font-weight: 700;
+  }
+
+  .nb-logout {
+    color: #C8A882;
+    background: transparent;
+    border: 1.5px solid rgba(217, 160, 102, 0.30);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 7px 16px;
+    margin-left: 8px;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+  }
+
+  .nb-logout:hover {
+    color: #FAF3E8;
+    border-color: #D9A066;
+    background: rgba(217, 160, 102, 0.10);
+  }
+</style>
