@@ -24,9 +24,10 @@
         "tsConfig": "tsconfig.app.json",
         "inlineStyleLanguage": "less",
         "assets": [
-        "src/favicon.ico",
-        "src/assets"
-        ],
+    "src/favicon.ico",
+    "src/assets",
+    "src/_redirects"
+],
         "styles": [
             "src/styles.less"
         ],
