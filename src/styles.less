@@ -964,3 +964,48 @@ app-profile .card-header {
   color: var(--oat-milk);
   transform: translateY(-1px);
 }
+
+.home-btn-primary {
+  padding: 12px 28px;
+  background: var(--caramel);
+  color: var(--dark-cocoa);
+  border-radius: 500px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.home-btn-primary:hover {
+  background: var(--cinnamon);
+  color: var(--oat-milk);
+  transform: translateY(-1px);
+}
+
+.home-btn-outline {
+  padding: 12px 28px;
+  border: 1.5px solid var(--caramel);
+  color: var(--caramel);
+  border-radius: 500px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.home-btn-outline:hover {
+  background: rgba(217, 160, 102, 0.12);
+  color: var(--cinnamon);
+  transform: translateY(-1px);
+}
+
+.home-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.home-card-icon {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
