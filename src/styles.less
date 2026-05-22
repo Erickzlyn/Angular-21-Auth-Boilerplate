@@ -900,3 +900,67 @@ app-profile .card-header {
   border-color: var(--error-red) !important;
   color: var(--error-red) !important;
 }
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--caramel);
+  color: var(--dark-cocoa);
+  font-size: 1.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.profile-email {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
+.profile-divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 28px 0;
+}
+
+.profile-info {
+  text-align: left;
+  margin-bottom: 28px;
+}
+
+.profile-info-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.profile-info-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.profile-update-btn {
+  display: inline-block;
+  padding: 12px 32px;
+  background: var(--caramel);
+  color: var(--dark-cocoa);
+  border-radius: 500px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.profile-update-btn:hover {
+  background: var(--cinnamon);
+  color: var(--oat-milk);
+  transform: translateY(-1px);
+}
