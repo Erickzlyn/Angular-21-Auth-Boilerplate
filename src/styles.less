@@ -1322,3 +1322,18 @@ app-profile .card-header {
 .ae-btn-link:hover {
   color: var(--caramel);
 }
+
+input, select, textarea {
+  background-color: var(--bg-elevated) !important;
+  color: var(--oat-milk) !important;
+  border-color: var(--border-color) !important;
+}
+
+input:focus, select:focus, textarea:focus {
+  background-color: var(--bg-raised) !important;
+  border-color: var(--caramel) !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted) !important;
+}
