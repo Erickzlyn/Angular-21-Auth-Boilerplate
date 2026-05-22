@@ -32,11 +32,21 @@
             </button>
           </td>
         </tr>
-        <tr *ngIf="!accounts">
+
+        <!-- Loading spinner -->
+        <tr *ngIf="loading">
           <td colspan="4" class="text-center" style="padding: 40px;">
             <span class="spinner-border spinner-border-lg align-center"></span>
           </td>
         </tr>
+
+        <!-- No accounts found -->
+        <tr *ngIf="!loading && (!accounts || accounts.length === 0)">
+          <td colspan="4" class="text-center" style="padding: 40px;">
+            No accounts found.
+          </td>
+        </tr>
+
       </tbody>
     </table>
   </div>
