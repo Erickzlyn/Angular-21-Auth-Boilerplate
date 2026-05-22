@@ -1,30 +1,33 @@
 <div class="home-wrapper">
-  <div class="home-hero">
-    <div class="home-greeting">👋 Welcome back,</div>
-    <h1 class="home-name">{{ account?.firstName }}!</h1>
-    <p class="home-sub">You're successfully logged in with Angular & JWT.</p>
+  <div class="container">
 
-    <div class="home-actions">
-      <a routerLink="/profile" class="home-btn-primary">View Profile</a>
-      <a *ngIf="account?.role === 'Admin'" routerLink="/admin" class="home-btn-outline">Admin Panel</a>
+    <div class="home-hero">
+      <div class="home-greeting">👋 Welcome back,</div>
+      <h1 class="home-name">{{ account?.firstName }}!</h1>
+      <p class="home-sub">You're successfully logged in with Angular & JWT.</p>
+      <div class="home-actions">
+        <a routerLink="/profile" class="home-btn-primary">View Profile</a>
+        <a *ngIf="account?.role === 'Admin'" routerLink="/admin" class="home-btn-outline">Admin Panel</a>
+      </div>
     </div>
-  </div>
 
-  <div class="home-card-grid">
-    <div class="home-card">
-      <div class="home-card-icon">🔐</div>
-      <div class="home-card-title">Secure Auth</div>
-      <p>JWT-based authentication keeps your session safe.</p>
+    <div class="home-card-grid">
+      <div class="home-card">
+        <div class="home-card-icon">🔐</div>
+        <div class="home-card-title">Secure Auth</div>
+        <p>JWT-based authentication keeps your session safe.</p>
+      </div>
+      <div class="home-card">
+        <div class="home-card-icon">⚡</div>
+        <div class="home-card-title">Fast & Modern</div>
+        <p>Built with Angular for a blazing fast experience.</p>
+      </div>
+      <div class="home-card">
+        <div class="home-card-icon">🛡️</div>
+        <div class="home-card-title">Role-Based Access</div>
+        <p>Admin and user roles with route guards.</p>
+      </div>
     </div>
-    <div class="home-card">
-      <div class="home-card-icon">⚡</div>
-      <div class="home-card-title">Fast & Modern</div>
-      <p>Built with Angular for a blazing fast experience.</p>
-    </div>
-    <div class="home-card">
-      <div class="home-card-icon">🛡️</div>
-      <div class="home-card-title">Role-Based Access</div>
-      <p>Admin and user roles with route guards.</p>
-    </div>
+
   </div>
 </div>
