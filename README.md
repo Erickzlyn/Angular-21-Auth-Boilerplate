@@ -1,11 +1,5 @@
 # Angular 21 Auth Boilerplate (Beginner Guide)
 
-## 🚀 Live Deployment
-
-- **Frontend (Live)**: cuyos-finalproject-frontend.onrender.com
-- **Backend API**: https://cuyos-finalproject-backend.onrender.com
-- **Swagger API Docs**: https://cuyos-finalproject-backend.onrender.com/api-docs
-
 ---
 
 This project is a beginner-friendly Angular 21 boilerplate that demonstrates a complete authentication flow:
