@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AccountService } from '@app/_services';
 
@@ -9,7 +9,10 @@ export class ListComponent implements OnInit, OnDestroy {
     loadError = '';
     private sub?: Subscription;
 
-    constructor(private accountService: AccountService) { }
+    constructor(
+        private accountService: AccountService,
+        private cdr: ChangeDetectorRef
+    ) { }
 
     ngOnInit() {
         this.loadAccounts();
@@ -24,11 +27,13 @@ export class ListComponent implements OnInit, OnDestroy {
                 next: (accounts) => {
                     this.accounts = accounts;
                     this.loading = false;
+                    this.cdr.detectChanges();
                 },
                 error: (err) => {
                     console.error(err);
                     this.loading = false;
                     this.loadError = 'error';
+                    this.cdr.detectChanges();
                 }
             });
     }
@@ -39,6 +44,7 @@ export class ListComponent implements OnInit, OnDestroy {
         this.accountService.delete(id)
             .subscribe(() => {
                 this.accounts = this.accounts!.filter(x => x.id !== id);
+                this.cdr.detectChanges();
             });
     }
 
