@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, finalize } from 'rxjs/operators';
 
@@ -72,7 +72,10 @@ export class AccountService {
     }
 
     getAll() {
-        return this.http.get<Account[]>(baseUrl, { withCredentials: true });
+        return this.http.get<Account[]>(baseUrl, {
+            withCredentials: true,
+            headers: new HttpHeaders({ 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' })
+        });
     }
 
     getById(id: string) {
