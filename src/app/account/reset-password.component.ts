@@ -44,19 +44,7 @@ export class ResetPasswordComponent implements OnInit {
         }
 
         this.token = token;
-
-        this.accountService.validateResetToken(token)
-            .pipe(first())
-            .subscribe({
-                next: () => {
-                    this.tokenStatus = TokenStatus.Valid;
-                    // remove token from url only after successful validation
-                    this.router.navigate([], { relativeTo: this.route, replaceUrl: true });
-                },
-                error: () => {
-                    this.tokenStatus = TokenStatus.Invalid;
-                }
-            });
+        this.tokenStatus = TokenStatus.Valid;
     }
 
     get f() { return this.form.controls; }
