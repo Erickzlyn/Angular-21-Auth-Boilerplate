@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-
 import { AccountService, AlertService } from '@app/_services';
 import { MustMatch } from '@app/_helpers';
 
@@ -20,19 +19,18 @@ export class AddEditComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private accountService: AccountService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private cdr: ChangeDetectorRef
     ) { }
 
     ngOnInit() {
         this.id = this.route.snapshot.params['id'];
-
         this.form = this.formBuilder.group({
             title: ['', Validators.required],
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
             role: ['', Validators.required],
-            // password only required in add mode
             password: ['', [Validators.minLength(6), ...(!this.id ? [Validators.required] : [])]],
             confirmPassword: ['']
         }, {
@@ -41,7 +39,6 @@ export class AddEditComponent implements OnInit {
 
         this.title = 'Create Account';
         if (this.id) {
-            // edit mode
             this.title = 'Edit Account';
             this.loading = true;
             this.accountService.getById(this.id)
@@ -49,29 +46,25 @@ export class AddEditComponent implements OnInit {
                 .subscribe(x => {
                     this.form.patchValue(x);
                     this.loading = false;
+                    this.cdr.detectChanges();
                 });
         }
     }
 
-    // convenience getter for easy access to form fields
     get f() { return this.form.controls; }
 
     onSubmit() {
         this.submitted = true;
-
-        // reset alerts on submit
         this.alertService.clear();
 
-        // stop here if form is invalid
         if (this.form.invalid) {
             return;
         }
 
         this.submitting = true;
-
-        // create or update account based on id param
         let saveAccount;
         let message: string;
+
         if (this.id) {
             saveAccount = () => this.accountService.update(this.id!, this.form.value);
             message = 'Account updated';
