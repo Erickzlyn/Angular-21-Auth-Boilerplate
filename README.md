@@ -22,7 +22,7 @@ This project is a beginner-friendly Angular 21 boilerplate that demonstrates a c
 - [5) How authentication works](#5-how-authentication-works)
 - [6) Authorization (roles route guards)](#6-authorization-roles--route-guards)
 - [7) Project structure (quick tour)](#7-project-structure-quick-tour)
-- [8) Deployment (Render)](#8-deployment-render)
+- [8) Deployment (Vercel)](#8-deployment-vercel)
 - [9) Troubleshooting](#9-troubleshooting)
 
 ## 1) Prerequisites
@@ -80,22 +80,32 @@ If you want to run everything fully in the browser (no backend), you can enable 
 
 ### Step 1: enable the fake backend provider
 
-Open   `src/app/app.module.ts` and ensure the `fakeBackendProvider` line in the `providers` array is present.
+Open `src/app/app.module.ts` and **uncomment both of the following lines**:
 
+**Line 6** — uncomment the import:
+```ts
+import { fakeBackendProvider } from './_helpers';
+```
 
-It should look like this:
+**Line 32** — uncomment the provider:
+```ts
+fakeBackendProvider
+```
+
+The final `providers` array should look like this:
 
 ```ts
-
-    providers: [
-    { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService]},
+providers: [
+    { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
-        // provider used to create fake backend
-        fakeBackendProvider
-    ],
+    // provider used to create fake backend
+    fakeBackendProvider
+],
 ```
+
+> **Important:** When switching back to real API (Stage B), re-comment both lines.
 
 ### Step 2: run the app
 
@@ -231,7 +241,7 @@ The UI is styled with Bootstrap 5 via a CDN Link in:
 
 - `src/index.html`
 
-## 8) Deployment (Render)
+## 8) Deployment (Vercel)
 
 ### Production Build
 
@@ -239,18 +249,23 @@ The UI is styled with Bootstrap 5 via a CDN Link in:
 ng build --configuration production
 ```
 
-This compiles the app into the `dist/angular-15-example` folder with optimized, minified bundles.
+This compiles the app into the `dist/angular-21-boilerplate` folder with optimized, minified bundles.
 
-### Deploy as Static Site on Render
+### Deploy as Static Site on Vercel
 
-1. Create a new **Static Site** on [Render](https://render.com)
-2. Connect your GitHub repository
-3. Set build command: `npm install && npm run build`
-4. Set publish directory: `dist/angular-15-example`
-5. **Important — SPA Rewrite Rule**: Add a rewrite rule:
-   - **Source**: `/*`
-   - **Destination**: `/index.html`
-   - This ensures deep links (like email verification URLs) don't return 404 errors
+This project includes a `vercel.json` file that handles SPA routing automatically — no manual configuration needed in the Vercel dashboard.
+
+1. Push your code to GitHub (this repository)
+2. Go to [vercel.com](https://vercel.com) and click **Add New Project**
+3. Import your GitHub repository (`Angular-21-Auth-Boilerplate`)
+4. Set the following in Vercel project settings:
+   - **Framework Preset**: `Other`
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist/angular-21-boilerplate`
+   - **Install Command**: `npm install`
+5. Click **Deploy**
+
+The included `vercel.json` rewrites all routes to `index.html`, so deep links (like email verification URLs `/account/verify-email?token=...`) will work correctly without returning 404 errors.
 
 ### Environment Configuration
 
@@ -259,9 +274,11 @@ Update `src/environments/environment.prod.ts` with your deployed backend API URL
 ```typescript
 export const environment = {
     production: true,
-    apiUrl: 'https://your-backend-name.onrender.com'
+    apiUrl: 'https://node-mysql-api-final-project.onrender.com'
 };
 ```
+
+> **CORS Reminder:** After deploying to Vercel, update your backend's `CORS_ORIGIN` environment variable to your new Vercel URL (e.g. `https://your-app.vercel.app`) so the browser can send requests with credentials.
 
 ## 9) Troubleshooting
 

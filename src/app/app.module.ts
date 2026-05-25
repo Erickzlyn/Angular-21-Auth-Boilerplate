@@ -3,7 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+// ─── STAGE A (Fake Backend Demo) ──────────────────────────────────────────
+// Uncomment the line below to enable the built-in fake backend interceptor.
+// Remember to also uncomment 'fakeBackendProvider' in the providers array.
 // import { fakeBackendProvider } from './_helpers';
+// ───────────────────────────────────────────────────────────────────────────
 
 import { AppRoutingModule } from './app-routing.module';
 import { JwtInterceptor, ErrorInterceptor, appInitializer } from './_helpers';
@@ -29,7 +33,7 @@ import { HomeComponent } from './home';
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
-        // fakeBackendProvider
+        // fakeBackendProvider  // ← STAGE A: uncomment this + the import above
     ],
     bootstrap: [AppComponent]
 })
