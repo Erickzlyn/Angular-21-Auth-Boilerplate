@@ -33,15 +33,44 @@
           </td>
         </tr>
 
-        <!-- Loading spinner -->
+        <!-- Loading spinner with slow hint -->
         <tr *ngIf="loading">
-          <td colspan="4" class="text-center" style="padding: 40px;">
+          <td colspan="4" style="padding: 40px; text-align: center;">
             <span class="spinner-border spinner-border-lg align-center"></span>
+            <div *ngIf="slowLoad" style="margin-top: 16px; color: #C8A882; font-size: 0.88rem;">
+              ⏳ Server is warming up, please wait a moment…
+            </div>
+          </td>
+        </tr>
+
+        <!-- Timeout error — server cold-starting -->
+        <tr *ngIf="!loading && loadError === 'timeout'">
+          <td colspan="4" style="padding: 40px; text-align: center;">
+            <div style="color: #E57373; margin-bottom: 12px;">⚠️ Server took too long to respond (it may be waking up).</div>
+            <button (click)="loadAccounts()" style="
+              background: #D9A066; color: #3E2723; border: none;
+              border-radius: 8px; padding: 10px 24px;
+              font-weight: 700; cursor: pointer; font-size: 0.9rem;">
+              🔄 Retry
+            </button>
+          </td>
+        </tr>
+
+        <!-- Generic error -->
+        <tr *ngIf="!loading && loadError === 'error'">
+          <td colspan="4" style="padding: 40px; text-align: center;">
+            <div style="color: #E57373; margin-bottom: 12px;">⚠️ Failed to load accounts. You may need to log in again.</div>
+            <button (click)="loadAccounts()" style="
+              background: #D9A066; color: #3E2723; border: none;
+              border-radius: 8px; padding: 10px 24px;
+              font-weight: 700; cursor: pointer; font-size: 0.9rem;">
+              🔄 Retry
+            </button>
           </td>
         </tr>
 
         <!-- No accounts found -->
-        <tr *ngIf="!loading && (!accounts || accounts.length === 0)">
+        <tr *ngIf="!loading && !loadError && (!accounts || accounts.length === 0)">
           <td colspan="4" class="text-center" style="padding: 40px;">
             No accounts found.
           </td>
