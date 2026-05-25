@@ -72,23 +72,21 @@ export class AccountService {
     }
 
     getAll() {
-        return this.http.get<Account[]>(baseUrl);
+        return this.http.get<Account[]>(baseUrl, { withCredentials: true });
     }
 
     getById(id: string) {
-        return this.http.get<Account>(`${baseUrl}/${id}`);
+        return this.http.get<Account>(`${baseUrl}/${id}`, { withCredentials: true });
     }
 
     create(params: any) {
-        return this.http.post(baseUrl, params);
+        return this.http.post(baseUrl, params, { withCredentials: true });
     }
 
     update(id: string, params: any) {
-        return this.http.put(`${baseUrl}/${id}`, params)
+        return this.http.put(`${baseUrl}/${id}`, params, { withCredentials: true })
             .pipe(map((account: any) => {
-                // update the current account if it was updated
                 if (account.id === this.accountValue?.id) {
-                    // publish updated account to subscribers
                     account = { ...this.accountValue, ...account };
                     this.accountSubject.next(account);
                 }
@@ -97,24 +95,18 @@ export class AccountService {
     }
 
     delete(id: string) {
-        return this.http.delete(`${baseUrl}/${id}`)
+        return this.http.delete(`${baseUrl}/${id}`, { withCredentials: true })
             .pipe(finalize(() => {
-                // auto logout if the logged in account was deleted
                 if (id === this.accountValue?.id)
                     this.logout();
             }));
     }
 
-    // helper methods
-
     private refreshTokenTimeout?: any;
 
     private startRefreshTokenTimer() {
-        // parse json object from base64 encoded jwt token
         const jwtBase64 = this.accountValue!.jwtToken!.split('.')[1];
         const jwtToken = JSON.parse(atob(jwtBase64));
-
-        // set a timeout to refresh the token a minute before it expires
         const expires = new Date(jwtToken.exp * 1000);
         const timeout = expires.getTime() - Date.now() - (60 * 1000);
         this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout);
