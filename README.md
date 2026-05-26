@@ -1,5 +1,9 @@
-# Angular 21 Auth Boilerplate (Beginner Guide)
+# Full-Stack Authentication System - Frontend
 
+## Live Deployment
+- **Frontend Application**: https://angular-21-auth-boilerplate-9etv.onrender.com
+- **Backend API**: https://node-mysql-api-final-project.onrender.com
+- **API Documentation**: https://node-mysql-api-final-project.onrender.com/api-docs
 ---
 
 This project is a beginner-friendly Angular 21 boilerplate that demonstrates a complete authentication flow:
